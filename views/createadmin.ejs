@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>99 Gist - Create Admin</title>
+    <link rel="stylesheet" href="/stylesheets/login.css" />
+  </head>
+  <body>
+    <header>
+      <h1>99 Gist</h1>
+      <a href="/admin/index" class="back-btn">Back to Dashboard</a>
+    </header>
+    <main>
+      <% if(hasErr){%>
+      <div class="alert error">
+        <% errMsg.forEach(message =>{ %>
+        <p><%= message%></p>
+        <% })%>
+      </div>
+      <%}%> <% if(hasSuccess){%>
+      <div class="alert success">
+        <% successMsg.forEach(message =>{ %>
+        <p><%= message%></p>
+        <% })%>
+      </div>
+      <%}%>
+      <form action="/admin/create" method="post">
+        <h4>Create New Admin Account</h4>
+        <input type="text" placeholder="Full Name" name="name" required />
+        <input type="email" placeholder="Email" name="email" required />
+        <input type="text" placeholder="Username" name="username" required />
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+        />
+        <input type="submit" value="Create Account" />
+        <a href="/admin/index" class="cancel-link">Cancel</a>
+      </form>
+    </main>
+  </body>
+</html>

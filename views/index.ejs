@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>99 Gist</title>
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+  </head>
+  <body>
+    <header>
+      <h2>99 Gist</h2>
+      <nav class="category">
+        <% catigory.forEach(cat =>{ %>
+        <a href="/catigory/<%= cat %>"><%= cat %></a>
+        <% }) %>
+      </nav>
+    </header>
+
+    <% if(hasErr){ %>
+    <div class="alert error">
+      <% errMsg.forEach(message =>{ %>
+      <p><%= message %></p>
+      <% }) %>
+    </div>
+    <% } %> <% if(hasSuccess){ %>
+    <div class="alert success">
+      <% successMsg.forEach(message =>{ %>
+      <p><%= message %></p>
+      <% }) %>
+    </div>
+    <% } %>
+
+    <div class="advert advert-top">
+      <h1>Post your ADVERT here</h1>
+    </div>
+
+    <main>
+      <% if(Blogs){ %>
+      <div id="blog-container" class="blog-list">
+        <% Blogs.forEach((blog, index) =>{ %>
+        <div class="blog-card paginated" data-index="<%= index %>">
+          <a href="/blog/<%= blog._id %>">
+            <h2><%= blog.title %></h2>
+            <p class="date"><%= blog.date %></p>
+          </a>
+        </div>
+        <% }) %>
+      </div>
+      <div class="pagination-controls">
+        <button id="prev-page">Previous</button>
+        <span id="page-indicator"></span>
+        <button id="next-page">Next</button>
+      </div>
+      <% } %>
+    </main>
+
+    <div class="advert advert-bottom">
+      <h1>Post your ADVERT here</h1>
+    </div>
+
+    <footer>
+      <p>Project done by 99Solution</p>
+    </footer>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const blogsPerPage = 6;
+      const cards = Array.from(document.querySelectorAll(".blog-card"));
+      const prevBtn = document.getElementById("prev-page");
+      const nextBtn = document.getElementById("next-page");
+      const pageIndicator = document.getElementById("page-indicator");
+
+      let currentPage = 1;
+      const totalPages = Math.ceil(cards.length / blogsPerPage);
+
+      function renderPage(page) {
+        const start = (page - 1) * blogsPerPage;
+        const end = page * blogsPerPage;
+
+        cards.forEach((card, index) => {
+          card.style.display = index >= start && index < end ? "block" : "none";
+        });
+
+        pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPages;
+      }
+
+      prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderPage(currentPage);
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderPage(currentPage);
+        }
+      });
+
+      renderPage(currentPage);
+    });
+  </script>
+</html>

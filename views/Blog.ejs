@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>99 Gist - Blog Detail</title>
+    <link rel="stylesheet" href="/stylesheets/Blog.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo">99 Gist</a>
+      <nav class="category">
+        <% catigory.forEach(cat =>{ %>
+        <a href="/catigory/<%= cat %>"><%= cat %></a>
+        <% }) %>
+      </nav>
+    </header>
+
+    <% if(hasErr){ %>
+    <div class="alert error">
+      <% errMsg.forEach(message =>{ %>
+      <p><%= message %></p>
+      <% }) %>
+    </div>
+    <% } %> <% if(hasSuccess){ %>
+    <div class="alert success">
+      <% successMsg.forEach(message =>{ %>
+      <p><%= message %></p>
+      <% }) %>
+    </div>
+    <% } %>
+
+    <div class="advert advert-top">
+      <h1>Post your ADVERT here</h1>
+    </div>
+
+    <main class="blog-detail">
+      <h1 class="title"><%= Blog.title %></h1>
+      <div class="images row">
+        <% Blog.images.forEach(image =>{ %>
+        <img src="/images/<%= image %>" alt="Blog Image" />
+        <% }) %>
+      </div>
+      <div class="content">
+        <p><%= Blog.content %></p>
+      </div>
+    </main>
+
+    <section class="preview">
+      <h2>More Blogs</h2>
+      <div class="blog-list">
+        <% preview.forEach(pre =>{ %>
+        <div class="blog-card">
+          <a href="/blog/<%= pre._id %>">
+            <h3><%= pre.title %></h3>
+            <p class="date"><%= pre.date %></p>
+          </a>
+        </div>
+        <% }) %>
+      </div>
+    </section>
+
+    <div class="advert advert-bottom">
+      <h1>Post your ADVERT here</h1>
+    </div>
+
+    <footer>
+      <p>Project done by 99Solution</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>99 Gist - Admin Login</title>
+    <link rel="stylesheet" href="/stylesheets/login.css" />
+  </head>
+  <body>
+    <header>
+      <h1>99 Gist</h1>
+      <a href="/" class="back-btn">Back to Homepage</a>
+    </header>
+    <main>
+      <% if(hasErr){%>
+      <div class="alert error">
+        <% errMsg.forEach(message =>{ %>
+        <p><%= message%></p>
+        <% })%>
+      </div>
+      <%}%> <% if(hasSuccess){%>
+      <div class="alert success">
+        <% successMsg.forEach(message =>{ %>
+        <p><%= message%></p>
+        <% })%>
+      </div>
+      <%}%>
+      <form action="/admin/login" method="post">
+        <h4>Admin Login</h4>
+        <input type="text" placeholder="Username" name="email" required />
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+        />
+        <input type="submit" value="Login" />
+      </form>
+    </main>
+  </body>
+</html>

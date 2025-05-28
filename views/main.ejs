@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>99 Gist - Admin Dashboard</title>
+    <link rel="stylesheet" href="/stylesheets/admin.css" />
+  </head>
+  <body>
+    <header>
+      <h1>99 Gist Admin Dashboard</h1>
+      <a href="/admin/logout" class="logout-btn">Logout</a>
+    </header>
+    <main>
+      <% if(hasErr){%>
+      <div class="alert error">
+        <% errMsg.forEach(message =>{ %>
+        <p><%= message%></p>
+        <% })%>
+      </div>
+      <%}%> <% if(hasSuccess){%>
+      <div class="alert success">
+        <% successMsg.forEach(message =>{ %>
+        <p><%= message%></p>
+        <% })%>
+      </div>
+      <%}%>
+
+      <div class="admin-actions">
+        <a href="/admin/createblog" class="admin-btn">Create New Blog</a>
+        <a href="/admin/showblog" class="admin-btn">Manage Blogs</a>
+        <a href="/admin/create" class="admin-btn">Create Admin Account</a>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>99 Gist - <%= Blog.title %></title>
+    <link rel="stylesheet" href="/stylesheets/Blog.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo">99 Gist</a>
+      <nav class="category">
+        <% catigory.forEach(cat =>{ %>
+        <a href="/catigory/<%= cat %>"><%= cat %></a>
+        <% }) %>
+      </nav>
+    </header>
+
+    <% if(hasErr){ %>
+    <div class="alert error">
+      <% errMsg.forEach(message =>{ %>
+      <p><%= message %></p>
+      <% }) %>
+    </div>
+    <% } %> <% if(hasSuccess){ %>
+    <div class="alert success">
+      <% successMsg.forEach(message =>{ %>
+      <p><%= message %></p>
+      <% }) %>
+    </div>
+    <% } %>
+    <main>
+      <h2><%= Blog.title %></h2>
+      <div class="images">
+        <% Blog.images.forEach(image =>{ %>
+        <img src="/images/<%= image %>" alt="" />
+        <% }) %>
+      </div>
+      <p><%= Blog.content %></p>
+      <% if(typeof isAdmin !== 'undefined' && isAdmin) { %>
+      <div class="admin-controls">
+        <a href="/admin/showblog" class="back-btn">Back to Blog List</a>
+      </div>
+      <% } %>
+    </main>
+  </body>
+</html>
